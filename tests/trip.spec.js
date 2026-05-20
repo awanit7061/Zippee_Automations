@@ -31,13 +31,17 @@ test('Automate ZFW Hospitality Login and Create Trip', async ({ page }) => {
 
   // 8. Search for AWBs
   console.log('Searching for AWBs...');
-  const awbs = [process.env.AWB_NUMBER];
+  const awbString = process.env.AWB_NUMBER || '';
+  const awbs = awbString.split(',').map(awb => awb.trim()).filter(Boolean);
   const searchInput = page.locator('input[placeholder="Search..."]').first();
 
   for (const awb of awbs) {
+    console.log(`Searching and selecting AWB: ${awb}`);
+    await searchInput.fill('');
+    await page.waitForTimeout(500); // small delay after clearing
     await searchInput.fill(awb);
     // Wait a short moment for the table to filter the results
-    await page.waitForTimeout(1000);
+    await page.waitForTimeout(2000);
     // 9. Select the specific AWB checkbox
     await page.locator('input[type="checkbox"]').nth(1).check();
   }
@@ -78,12 +82,19 @@ test('Automate ZFW Hospitality Login and Create Trip', async ({ page }) => {
   console.log('Assigning Rider to Awanit Kumar Singh...');
   await page.waitForTimeout(2000); // let the page settle
 
-  // Use the correct placeholder for the dropdown
-  await page.getByPlaceholder('Select Rider').click();
-  // We type the name just in case it's a searchable dropdown
-  await page.getByPlaceholder('Select Rider').fill(process.env.RIDER_NAME);
+  // Click the searchable dropdown (which shows "Select...") using force to bypass the sticky navbar
+  await page.getByText('Select...').first().click({ force: true });
+  await page.waitForTimeout(500);
+  
+  // Type the rider name using keyboard (common for react-select components)
+  await page.keyboard.type(process.env.RIDER_NAME);
   await page.waitForTimeout(1000);
-  await page.getByText(process.env.RIDER_NAME, { exact: false }).first().click();
+  
+  // Use keyboard to select the option (ArrowDown to highlight, Enter to select)
+  await page.keyboard.press('ArrowDown');
+  await page.waitForTimeout(200);
+  await page.keyboard.press('Enter');
+  await page.waitForTimeout(500);
 
   // Click the correct Assign Rider button
   await page.getByRole('button', { name: 'Assign Rider', exact: true }).click();
