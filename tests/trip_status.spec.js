@@ -50,12 +50,6 @@ test('Automate ZFW Hospitality Check Trip Status', async ({ page }) => {
   console.log(rowText);
   console.log('-------------------------------------\n');
 
-  // If you want to click "View Details" to see more information, we can do that as well:
-  // console.log('Clicking the 3 dots (View Details) for the trip...');
-  // await page.locator('table tbody tr').first().locator('img[alt="View Details"]').first().click();
-  // await page.waitForTimeout(1000);
-  // await page.getByRole('button', { name: 'View Details', exact: true }).click();
-  // await page.waitForTimeout(3000);
 
   // Wait a few seconds to visually verify
   await page.waitForTimeout(4000);
