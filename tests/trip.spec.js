@@ -102,57 +102,6 @@ test('Automate ZFW Hospitality Login and Create Trip', async ({ page }) => {
   console.log('Rider assigned successfully!');
 
 
-
-
-
-
-  // console.log('Logged in. Navigating to Valkyrie -> Trips...');
-  //   // 5. Click on Valkyrie in the sidebar to load the correct module context
-  //   await page.getByRole('link', { name: 'Valkyrie' }).click();
-  //   await page.waitForTimeout(1000);
-
-  //   // Navigate to Trips
-  //   await page.goto(process.env.BASE_URL + 'pnd/trips');
-
-  //   // Wait for the page to settle
-  //   await page.waitForTimeout(2000);
-
-  //   // 5. Go to "All" tab
-  //   console.log('Going to All tab...');
-  //   await page.getByText('All', { exact: true }).click();
-  //   await page.waitForTimeout(1000);
-
-  //   // 6. Search for the specific Trip ID
-  //   const tripIdToDelete = `${tripId}`; // Update this with the Trip ID you want to delete
-  //   console.log(`Searching for Trip ID: ${tripIdToDelete}...`);
-  //   await page.getByPlaceholder('Search...').first().fill(tripIdToDelete);
-  //   await page.waitForTimeout(2000); // Wait for the table to filter
-
-  //   // Wait for the table to load after search
-  //   await page.waitForSelector('table tbody tr', { timeout: 10000 });
-
-  //   // 7. Click the 3 dots for that trip
-  //   console.log('Clicking the 3 dots (View Details) for the trip...');
-  //   await page.locator('table tbody tr').first().locator('img[alt="View Details"]').first().click();
-  //   await page.waitForTimeout(1000);
-
-  //   // 8. Click "Delete Trip" from the dropdown
-  //   console.log('Clicking "Delete Trip" option...');
-  //   await page.getByRole('button', { name: 'Delete Trip', exact: true }).click();
-  //   await page.waitForTimeout(1000);
-
-  //   // 9. Confirm the deletion in the modal
-  //   console.log('Confirming trip deletion...');
-  //   await page.getByRole('button', { name: 'Delete', exact: true }).click();
-
-  //   console.log(`Trip ${tripIdToDelete} deleted successfully!`);
-
-
-
-
-
-
-
   // Wait 4 seconds at the end so you can visually verify the result before the browser closes!
   await page.waitForTimeout(4000);
 });
